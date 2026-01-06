@@ -80,37 +80,21 @@ A comprehensive ride-sharing platform built with the MERN stack (MongoDB, Expres
 
 ```
 cabzee-uber-clone/
-├── backend/
-│   ├── middleware/
-│   │   ├── auth.js          # Authentication & authorization
-│   │   └── upload.js        # File upload configuration
-│   ├── models/
-│   │   ├── User.js          # User model (Rider/Driver/Admin)
-│   │   └── Ride.js          # Ride model
-│   ├── routes/
-│   │   ├── auth.js          # Authentication routes
-│   │   ├── users.js         # User management routes
-│   │   └── rides.js         # Ride management routes
+├── frontend/            # React application
+│   ├── src/
 │   ├── public/
-│   │   └── uploads/         # Uploaded files (profile pics, documents)
+│   ├── package.json
+│   └── ...
+├── backend/             # Node.js/Express application
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── public/
 │   ├── server.js            # Express server setup
 │   └── package.json
-├── src/
-│   ├── components/
-│   │   ├── Auth/            # Login, Register, OTP, Password Reset
-│   │   ├── Dashboard/       # User/Driver/Admin dashboards
-│   │   ├── Driver/          # Driver-specific components
-│   │   ├── User/            # Rider-specific components
-│   │   ├── Payment/         # Payment management
-│   │   ├── Feedback/        # Ratings and reviews
-│   │   ├── Common/          # Shared components
-│   │   └── Admin/           # Admin panel
-│   ├── services/            # API service layer
-│   ├── App.js
-│   └── index.js
 ├── .gitignore
 ├── README.md
-└── package.json
+└── ...
 ```
 
 ## 🚦 Getting Started
