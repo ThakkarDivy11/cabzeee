@@ -16,7 +16,7 @@ const DriverProfile = () => {
           return;
         }
 
-        const response = await fetch('http://localhost:5000/api/users/me', {
+        const response = await fetch((process.env.REACT_APP_API_URL || 'http://localhost:5000') + '/api/users/me', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -67,7 +67,7 @@ const DriverProfile = () => {
               </button>
               <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center mr-3 overflow-hidden border-2 border-gray-200">
                 {user.profilePicture ? (
-                  <img src={user.profilePicture.startsWith('http') ? user.profilePicture : `http://localhost:5000${user.profilePicture}`} alt={user.name} className="w-full h-full object-cover" />
+                  <img src={user.profilePicture.startsWith('http') ? user.profilePicture : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${user.profilePicture}`} alt={user.name} className="w-full h-full object-cover" />
                 ) : (
                   <span className="text-white font-bold text-sm">{user.name.charAt(0).toUpperCase()}</span>
                 )}
@@ -93,7 +93,7 @@ const DriverProfile = () => {
           <div className="px-4 py-5 sm:p-6 flex flex-col items-center border-b border-gray-200 bg-gray-50">
             <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg mb-4 bg-black flex items-center justify-center">
               {user.profilePicture ? (
-                <img src={user.profilePicture.startsWith('http') ? user.profilePicture : `http://localhost:5000${user.profilePicture}`} alt={user.name} className="w-full h-full object-cover" />
+                <img src={user.profilePicture.startsWith('http') ? user.profilePicture : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${user.profilePicture}`} alt={user.name} className="w-full h-full object-cover" />
               ) : (
                 <span className="text-white text-4xl font-bold">{user.name.charAt(0).toUpperCase()}</span>
               )}

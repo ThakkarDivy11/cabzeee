@@ -48,7 +48,7 @@ const AcceptRejectRide = () => {
     setProcessing(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/rides/${rideRequest._id}/accept`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/rides/${rideRequest._id}/accept`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const AcceptRejectRide = () => {
     setProcessing(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/rides/${rideRequest._id}/reject`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/rides/${rideRequest._id}/reject`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

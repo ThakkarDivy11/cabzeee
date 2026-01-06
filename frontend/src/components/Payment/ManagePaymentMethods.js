@@ -24,7 +24,7 @@ const ManagePaymentMethods = () => {
     const fetchUserData = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/users/me', {
+            const response = await fetch((process.env.REACT_APP_API_URL || 'http://localhost:5000') + '/api/users/me', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -45,7 +45,7 @@ const ManagePaymentMethods = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/users/card', {
+            const response = await fetch((process.env.REACT_APP_API_URL || 'http://localhost:5000') + '/api/users/card', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const ManagePaymentMethods = () => {
         if (!window.confirm('Are you sure you want to remove this card?')) return;
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/users/card/${cardId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/users/card/${cardId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

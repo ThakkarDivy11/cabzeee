@@ -14,7 +14,7 @@ const DocumentUpload = () => {
     const fetchUserData = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/users/me', {
+            const response = await fetch((process.env.REACT_APP_API_URL || 'http://localhost:5000') + '/api/users/me', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
@@ -45,7 +45,7 @@ const DocumentUpload = () => {
         setUploading(true);
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/users/documents/upload', {
+            const response = await fetch((process.env.REACT_APP_API_URL || 'http://localhost:5000') + '/api/users/documents/upload', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -99,7 +99,7 @@ const DocumentUpload = () => {
                                 <div className="mb-4 p-2 bg-gray-50 rounded text-sm">
                                     <p className="font-medium text-gray-700">Current Document:</p>
                                     <a
-                                        href={`http://localhost:5000${user.documents[key].fileUrl}`}
+                                        href={`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${user.documents[key].fileUrl}`}
                                         target="_blank"
                                         rel="noreferrer"
                                         className="text-blue-600 hover:underline break-all"

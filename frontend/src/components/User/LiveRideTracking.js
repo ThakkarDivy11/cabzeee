@@ -22,7 +22,7 @@ const LiveRideTracking = () => {
     const fetchRideDetails = useCallback(async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/rides/${rideId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/rides/${rideId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

@@ -23,7 +23,7 @@ const EditDriverProfile = () => {
           return;
         }
 
-        const response = await fetch('http://localhost:5000/api/users/me', {
+        const response = await fetch((process.env.REACT_APP_API_URL || 'http://localhost:5000') + '/api/users/me', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -85,7 +85,7 @@ const EditDriverProfile = () => {
         uploadData.append('profilePicture', selectedFile);
       }
 
-      const response = await fetch('http://localhost:5000/api/users/me', {
+      const response = await fetch((process.env.REACT_APP_API_URL || 'http://localhost:5000') + '/api/users/me', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -177,7 +177,7 @@ const EditDriverProfile = () => {
               <div className="mt-2 flex items-center space-x-5">
                 <div className="w-20 h-20 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center border-2 border-gray-200">
                   {preview ? (
-                    <img src={preview.startsWith('data:') || preview.startsWith('http') ? preview : `http://localhost:5000${preview}`} alt="Profile" className="w-full h-full object-cover" />
+                    <img src={preview.startsWith('data:') || preview.startsWith('http') ? preview : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${preview}`} alt="Profile" className="w-full h-full object-cover" />
                   ) : (
                     <svg className="h-10 w-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />

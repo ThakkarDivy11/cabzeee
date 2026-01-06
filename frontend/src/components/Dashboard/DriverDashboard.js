@@ -40,7 +40,7 @@ const DriverDashboard = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/users/me', {
+      const response = await fetch((process.env.REACT_APP_API_URL || 'http://localhost:5000') + '/api/users/me', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const DriverDashboard = () => {
             <div className="flex items-center">
               <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center mr-3 overflow-hidden border-2 border-gray-100">
                 {user.profilePicture ? (
-                  <img src={user.profilePicture.startsWith('http') ? user.profilePicture : `http://localhost:5000${user.profilePicture}`} alt={user.name} className="w-full h-full object-cover" />
+                  <img src={user.profilePicture.startsWith('http') ? user.profilePicture : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${user.profilePicture}`} alt={user.name} className="w-full h-full object-cover" />
                 ) : (
                   <span className="text-white font-bold text-sm">{user.name.charAt(0).toUpperCase()}</span>
                 )}

@@ -16,7 +16,7 @@ const AdminVerification = () => {
             const token = localStorage.getItem('token');
             // We need a route to get ALL drivers, not just online ones.
             // Re-using /api/users for now (filtered by role=driver on client if needed, but better to filter on server)
-            const response = await fetch('http://localhost:5000/api/users', {
+            const response = await fetch((process.env.REACT_APP_API_URL || 'http://localhost:5000') + '/api/users', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
@@ -34,7 +34,7 @@ const AdminVerification = () => {
     const handleVerify = async (userId, type, status) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/users/documents/${userId}/verify`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/users/documents/${userId}/verify`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,14 +108,14 @@ const AdminVerification = () => {
                                                     ) : (
                                                         <div className="w-full h-32 rounded border border-gray-200 overflow-hidden bg-white shadow-inner">
                                                             <img
-                                                                src={`http://localhost:5000${doc.fileUrl}`}
+                                                                src={`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${doc.fileUrl}`}
                                                                 alt={type}
                                                                 className="w-full h-full object-cover transition-transform group-hover:scale-110"
                                                             />
                                                         </div>
                                                     )}
                                                     <a
-                                                        href={`http://localhost:5000${doc.fileUrl}`}
+                                                        href={`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${doc.fileUrl}`}
                                                         target="_blank"
                                                         rel="noreferrer"
                                                         className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded"
@@ -127,7 +127,7 @@ const AdminVerification = () => {
                                                 </div>
 
                                                 <a
-                                                    href={`http://localhost:5000${doc.fileUrl}`}
+                                                    href={`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${doc.fileUrl}`}
                                                     target="_blank"
                                                     rel="noreferrer"
                                                     className="w-full bg-blue-50 text-blue-600 text-center py-2 rounded border border-blue-200 text-sm font-bold hover:bg-blue-100 transition-colors block"

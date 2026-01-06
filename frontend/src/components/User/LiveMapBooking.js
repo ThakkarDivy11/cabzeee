@@ -58,7 +58,7 @@ const LiveMapBooking = () => {
     const fetchNearbyDrivers = useCallback(async (coords) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/users/drivers?lat=${coords[0]}&lon=${coords[1]}&radius=5000`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/users/drivers?lat=${coords[0]}&lon=${coords[1]}&radius=5000`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
@@ -147,7 +147,7 @@ const LiveMapBooking = () => {
                 fare: fareEstimate
             };
 
-            const response = await fetch('http://localhost:5000/api/rides', {
+            const response = await fetch((process.env.REACT_APP_API_URL || 'http://localhost:5000') + '/api/rides', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

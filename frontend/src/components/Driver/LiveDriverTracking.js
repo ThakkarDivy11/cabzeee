@@ -26,7 +26,7 @@ const LiveDriverTracking = () => {
     const fetchActiveRide = useCallback(async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/rides/my-rides', {
+            const response = await fetch((process.env.REACT_APP_API_URL || 'http://localhost:5000') + '/api/rides/my-rides', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -97,7 +97,7 @@ const LiveDriverTracking = () => {
 
             // Also update via API
             const token = localStorage.getItem('token');
-            fetch(`http://localhost:5000/api/rides/${ride._id}/location`, {
+            fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/rides/${ride._id}/location`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ const LiveDriverTracking = () => {
         setVerifying(true);
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/rides/${ride._id}/verify-otp`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/rides/${ride._id}/verify-otp`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -217,7 +217,7 @@ const LiveDriverTracking = () => {
     const handleStatusChange = async (newStatus) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/rides/${ride._id}/status`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/rides/${ride._id}/status`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
