@@ -37,7 +37,7 @@ const UserDashboard = () => {
               <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center mr-3">
                 <span className="text-white font-bold text-sm">U</span>
               </div>
-              <h1 className="text-xl font-bold text-gray-900">Uber Clone</h1>
+              <h1 className="text-xl font-bold text-gray-900">CabZee</h1>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">Welcome, {user.name}</span>
@@ -57,7 +57,7 @@ const UserDashboard = () => {
         <div className="px-4 py-6 sm:px-0">
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Dashboard</h2>
-            <p className="text-gray-600">Welcome to your Uber Clone dashboard</p>
+            <p className="text-gray-600">Welcome to your CabZee dashboard</p>
           </div>
 
           {/* User Info Card */}

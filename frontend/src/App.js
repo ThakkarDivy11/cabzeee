@@ -191,7 +191,7 @@ const AdminDashboard = () => {
                   <span className="text-white font-bold text-sm">{user.name.charAt(0).toUpperCase()}</span>
                 )}
               </div>
-              <h1 className="text-xl font-bold text-gray-900">Admin Dashboard - Uber Clone</h1>
+              <h1 className="text-xl font-bold text-gray-900">Admin Dashboard - CabZee</h1>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">Welcome, {user.name}</span>

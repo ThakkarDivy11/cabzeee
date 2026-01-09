@@ -3,6 +3,7 @@ const User = require('../models/User');
 const { protect, authorize } = require('../middleware/auth');
 const { body, validationResult } = require('express-validator');
 const upload = require('../middleware/upload');
+const sendEmail = require('../utils/email');
 
 const router = express.Router();
 
@@ -285,9 +286,11 @@ router.put('/documents/:userId/verify', protect, authorize('admin'), [
   body('type').isIn(['license', 'insurance', 'registration']).withMessage('Invalid document type'),
   body('status').isBoolean().withMessage('Status must be boolean (true for verified, false for rejected)')
 ], validateRequest, async (req, res) => {
+
   try {
-    const { type, status } = req.body;
+    const { type, status,rejectReason } = req.body;
     const { userId } = req.params;
+console.log("HEY")
 
     const updateQuery = {};
     updateQuery[`documents.${type}.verified`] = status;
@@ -297,7 +300,75 @@ router.put('/documents/:userId/verify', protect, authorize('admin'), [
       { $set: updateQuery },
       { new: true }
     );
+    ////////////////////////////////////////////////////
+ try {
+      await sendEmail({
+        to: user.email,
+        subject: 'Document Verification - CabZee',
+        html: ` <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #333;">CabZee Document Update</h2>
 
+      <p>Hello ${user.name || 'User'},</p>
+
+      <p>
+        Your submitted document <strong>${type}</strong> has been
+        <strong style="color: ${status === false ? '#dc3545' :'#28a745' };">
+          ${status}
+        </strong>.
+      </p>
+
+      <div style="
+        background-color: ${status === false ? '#3b1317ff' :'#024a27ff'};
+        padding: 20px;
+        border-radius: 5px;
+        margin: 20px 0;
+      ">
+        <p style="margin: 0;">
+          <strong>Document Type:</strong> ${type}
+        </p>
+        <p style="margin: 8px 0 0;">
+          <strong>Status:</strong>
+          <span style="color: ${status === false ?'#dc3545' :'#28a745'};">
+            ${status}
+          </span>
+        </p>
+
+ ${
+  status === false
+    ? `<p style="margin-top: 10px; color: #dc3545;">
+         <strong>Reason:</strong> ${rejectReason}
+       </p>`
+    : ''
+}
+</div>
+
+${
+  status === true
+    ? `<p>Your ${type} is Approved you can check it from Driver Verification Portal in CabZee.</p>`
+    : `<p>Please re-upload the correct document to proceed further.</p>`
+}
+
+
+      <p>If you have any questions, feel free to contact our support team.</p>
+
+      <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+
+      <p style="color: #666; font-size: 12px;">
+        CabZee - Your Ride, Your Way
+      </p>
+    </div>
+  `
+      });
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError);
+
+      res.status(500).json({
+        success: false,
+        message: 'Failed to send email. Please try again later.'
+      });
+    }
+
+    ///////////////////////////////////////////////////
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }

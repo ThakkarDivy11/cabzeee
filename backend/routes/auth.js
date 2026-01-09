@@ -238,7 +238,8 @@ router.post('/login', [
       isVerified: user.isVerified,
       rating: user.rating,
       totalRides: user.totalRides,
-      profilePicture: user.profilePicture
+      profilePicture: user.profilePicture,
+      documents: user.documents
     };
 
     res.json({

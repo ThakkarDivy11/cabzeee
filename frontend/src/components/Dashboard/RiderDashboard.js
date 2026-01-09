@@ -41,12 +41,12 @@ const RiderDashboard = () => {
             <div className="flex items-center">
               <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center mr-3 overflow-hidden border-2 border-gray-100">
                 {user.profilePicture ? (
-                  <img src={user.profilePicture} alt={user.name} className="w-full h-full object-cover" />
+                  <img src={user.profilePicture.startsWith('http') ? user.profilePicture : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${user.profilePicture}`} alt={user.name}  className="w-full h-full object-cover" />
                 ) : (
                   <span className="text-white font-bold text-sm">{user.name.charAt(0).toUpperCase()}</span>
                 )}
               </div>
-              <h1 className="text-xl font-bold text-gray-900">Uber Clone - Rider</h1>
+              <h1 className="text-xl font-bold text-gray-900">CabZee - Rider</h1>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">Welcome, {user.name}</span>

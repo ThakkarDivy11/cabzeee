@@ -6,7 +6,7 @@ const Sidebar = ({ isOpen, closeSidebar, user }) => {
 
     const riderLinks = [
         { name: 'Dashboard', path: '/rider', icon: 'home' },
-        { name: 'Book a Ride', path: '/ride-request', icon: 'map' },
+        { name: 'Book a Ride', path: '/book-ride-live', icon: 'map' },
         { name: 'My Trips', path: '/ride-history', icon: 'clock' },
         { name: 'Payment Methods', path: '/payment-methods', icon: 'credit-card' },
         { name: 'Profile', path: '/user-profile', icon: 'user' },
@@ -18,7 +18,7 @@ const Sidebar = ({ isOpen, closeSidebar, user }) => {
         { name: 'My Trips', path: '/driver-ride-history', icon: 'clock' },
         { name: 'Earnings', path: '/driver-earnings', icon: 'currency-rupee' },
         { name: 'Vehicle Details', path: '/vehicle-details', icon: 'truck' },
-        { name: 'Documents', path: '/driver-documents', icon: 'document' },
+        { name: 'Documents', path: '/driver/documents', icon: 'document' },
         { name: 'Profile', path: '/driver-profile', icon: 'user' },
     ];
 
@@ -70,18 +70,18 @@ const Sidebar = ({ isOpen, closeSidebar, user }) => {
 
                 <nav className="mt-6 px-4 space-y-2">
                     {links.map((link) => (
-                        <div key={link.path} className={(link.name !== 'Dashboard' && link.name !== 'Profile' && link.name !== 'Payment Methods' && link.name !== 'Earnings') ? 'opacity-50 cursor-not-allowed' : ''}>
+                        <div key={link.path} className={(link.name !== 'Dashboard' && link.name !== 'Profile' && link.name !== 'Book a Ride' && link.name !== 'Payment Methods' && link.name !== 'Earnings' && link.name !== 'Documents') ? 'opacity-50 cursor-not-allowed' : ''}>
                             <NavLink
-                                to={(link.name === 'Dashboard' || link.name === 'Profile' || link.name === 'Payment Methods' || link.name === 'Earnings') ? link.path : '#'}
+                                to={(link.name === 'Dashboard' || link.name === 'Profile' || link.name === 'Payment Methods' || link.name === 'Earnings') || link.name === 'Book a Ride' || link.name === 'Documents'? link.path : '#'}
                                 onClick={(e) => {
-                                    if (link.name !== 'Dashboard' && link.name !== 'Profile' && link.name !== 'Payment Methods' && link.name !== 'Earnings') {
+                                    if (link.name !== 'Dashboard' && link.name !== 'Profile' && link.name !== 'Payment Methods' && link.name !== 'Earnings' && link.name !== 'Book a Ride' && link.name !== 'Documents') {
                                         e.preventDefault();
                                         return;
                                     }
                                     if (window.innerWidth < 1024) closeSidebar();
                                 }}
                                 className={({ isActive }) =>
-                                    `flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 ${isActive && (link.name === 'Dashboard' || link.name === 'Profile' || link.name === 'Payment Methods' || link.name === 'Earnings')
+                                    `flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 ${isActive && (link.name === 'Dashboard' || link.name === 'Profile' || link.name === 'Payment Methods' || link.name === 'Earnings' || link.name !== 'Book a Ride' ||  link.name !== 'Documents')
                                         ? 'bg-gray-800 text-white'
                                         : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                                     }`
@@ -90,7 +90,7 @@ const Sidebar = ({ isOpen, closeSidebar, user }) => {
                                 <svg className="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     {getIcon(link.icon)}
                                 </svg>
-                                {link.name} {(link.name !== 'Dashboard' && link.name !== 'Profile' && link.name !== 'Payment Methods' && link.name !== 'Earnings') && <span className="ml-2 text-[10px] bg-gray-700 px-1.5 py-0.5 rounded text-gray-300">Soon</span>}
+                                {link.name} {(link.name !== 'Dashboard' && link.name !== 'Profile' && link.name !== 'Payment Methods' && link.name !== 'Earnings' && link.name !== 'Book a Ride' && link.name !== 'Documents') && <span className="ml-2 text-[10px] bg-gray-700 px-1.5 py-0.5 rounded text-gray-300">Soon</span>}
                             </NavLink>
                         </div>
                     ))}

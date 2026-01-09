@@ -27,7 +27,7 @@ const Navbar = ({ toggleSidebar, user, title }) => {
                         </svg>
                     </button>
 
-                    <h1 className="text-xl font-bold text-gray-900 hidden sm:block">{title || 'Uber Clone'}</h1>
+                    <h1 className="text-xl font-bold text-gray-900 hidden sm:block">{title || 'CabZee'}</h1>
                 </div>
 
                 <div className="flex items-center space-x-4">
@@ -40,8 +40,7 @@ const Navbar = ({ toggleSidebar, user, title }) => {
                             <span className="hidden md:block text-sm font-medium text-gray-700">{user?.name}</span>
                             <div className="h-9 w-9 bg-black rounded-full flex items-center justify-center overflow-hidden border border-gray-200">
                                 {user?.profilePicture ? (
-                                    <img src={user.profilePicture} alt="Profile" className="h-full w-full object-cover" />
-                                ) : (
+<img src={user.profilePicture.startsWith('http') ? user.profilePicture : `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${user.profilePicture}`} alt={user.name}  ></img>                              ) : (
                                     <span className="text-white font-bold text-sm">{user?.name?.charAt(0).toUpperCase()}</span>
                                 )}
                             </div>

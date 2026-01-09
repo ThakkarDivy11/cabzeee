@@ -132,9 +132,9 @@ const ManagePaymentMethods = () => {
                             </svg>
                         </div>
                     </div>
-                    <div className="mt-6 text-sm text-gray-400">
+                    {/* <div className="mt-6 text-sm text-gray-400">
                         Add Money Coming Soon
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Saved Cards Section */}

@@ -1,4 +1,4 @@
-# CabZee - Uber Clone (MERN Stack)
+# CabZee - CabZee (MERN Stack)
 
 A comprehensive ride-sharing platform built with the MERN stack (MongoDB, Express.js, React, Node.js) featuring real-time ride booking, driver management, and secure payment processing.
 
